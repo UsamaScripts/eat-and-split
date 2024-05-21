@@ -1,4 +1,4 @@
-import { Children } from "react";
+import { useState } from "react";
 
 const initialFriends = [
   {
@@ -21,13 +21,27 @@ const initialFriends = [
   },
 ];
 
+function Button({ children, onClick }) {
+  return (
+    <button className="button" onClick={onClick}>
+      {children}
+    </button>
+  );
+}
+
 function App() {
+  const [showFormAddFriend, setFormAddFriend] = useState(false);
+  function handleShow() {
+    setFormAddFriend((show) => !show);
+  }
   return (
     <div className="app">
       <div className="sidebar">
         <FriendList />
-        <FormAddFriend />
-        <Button>Add Friend</Button>
+        {showFormAddFriend && <FormAddFriend />}
+        <Button onClick={handleShow}>
+          {showFormAddFriend ? "Close" : "Add Friend"}
+        </Button>
       </div>
       <FormSplitBill />
     </div>
@@ -64,15 +78,13 @@ function Friends({ friend, key }) {
     </li>
   );
 }
-function Button({ children }) {
-  return <button className="button">{children}</button>;
-}
+
 function FormAddFriend() {
   return (
     <form className="form-add-friend">
-      <lable> Friend Name 🤦🏼‍♂️</lable>
+      <label> Friend Name 🤦🏼‍♂️</label>
       <input type="text" />
-      <lable> Image Url 🎆</lable>
+      <label> Image Url 🎆</label>
       <input type="text" />
       <Button>Add Friend</Button>
     </form>
@@ -84,16 +96,16 @@ function FormSplitBill() {
     <form className="form-split-bill">
       <h2>Eat Split Bill with X</h2>
 
-      <lable> Bill Value 🤦🏼‍♂️</lable>
+      <label> Bill Value 🤦🏼‍♂️</label>
       <input type="text" />
 
-      <lable> Your Expenses 🤦🏼‍♂️</lable>
+      <label> Your Expenses 🤦🏼‍♂️</label>
       <input type="text" />
 
-      <lable> Your Friend Expenses 🤦🏼‍♂️</lable>
+      <label> Your Friend Expenses 🤦🏼‍♂️</label>
       <input type="text" disabled />
 
-      <lable>🤑 Who are Going To Pay Bill </lable>
+      <label>🤑 Who are Going To Pay Bill </label>
       <select>
         <option value="user">user</option>
         <option value="firend">friend</option>
