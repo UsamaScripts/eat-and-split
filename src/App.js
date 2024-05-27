@@ -73,6 +73,7 @@ function App() {
         <FormSplitBill
           selectedFriend={selectedFriend}
           handleSplitBill={handleSplitBill}
+          key={selectedFriend.id}
         />
       )}
     </div>
@@ -160,7 +161,7 @@ function FormAddFriend({ setFriends, setFormAddFriend }) {
 function FormSplitBill({ selectedFriend, handleSplitBill }) {
   const [bill, setBill] = useState("");
   const [paidByUser, setPaidByUser] = useState("");
-  const [whoIsPaying, setWhoIsPaying] = useState("");
+  const [whoIsPaying, setWhoIsPaying] = useState("user");
   const paidByFriend = bill && bill - paidByUser;
   function handleSubmit(e) {
     e.preventDefault();
